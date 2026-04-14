@@ -1,10 +1,9 @@
 require('dotenv').config();
-console.log("KEY:", process.env.STRIPE_SECRET_KEY);
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const express = require('express');
 const cors = require('cors');
 const app = express();
-
 
 app.use(cors());
 app.use(express.json());
@@ -38,4 +37,7 @@ app.post('/create-payment-intent', async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log('Servidor en http://localhost:3000'));
+// 🔥 SOLO ESTE CAMBIO (OBLIGATORIO PARA RENDER)
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
